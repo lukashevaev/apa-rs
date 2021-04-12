@@ -59,7 +59,7 @@ public class ApaRecordSchema implements BeanSchema {
 
     @Override
     public String getMimeType() {
-        return "application/x-bibtex";
+        return "application/html";
     }
 
     private ApaBuilder getBuilder(Document src) throws Exception {
