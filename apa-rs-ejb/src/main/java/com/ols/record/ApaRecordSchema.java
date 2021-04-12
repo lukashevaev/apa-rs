@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 
 //import javax.annotation.PostConstruct;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMResult;
@@ -21,10 +22,9 @@ import java.util.logging.Logger;
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @TransactionManagement(TransactionManagementType.BEAN)
-@Remote(RecordSchema.class)
-@EJB(name = "java:global/ruslan/recordSchema/harvard", beanInterface = RecordSchema.class , beanName = "harvard")
-public class ApaRecordSchema implements RecordSchema {
-    private static final String URI = "bibtex";
+@Remote(BeanSchema.class)
+@EJB(name = "java:global/ruslan/recordSchema/harvard", beanInterface = BeanSchema.class , beanName = "apa")
+public class ApaRecordSchema implements BeanSchema {
     private static final Logger log = Logger.getLogger(ApaRecordSchema.class
             .getName());
     private static final TransformerFactory transformerFactory = TransformerFactory
@@ -34,7 +34,7 @@ public class ApaRecordSchema implements RecordSchema {
     @EJB(lookup = "java:global/ruslan/recordSchema/ruslan", beanInterface = RecordSchema.class)
     private RecordSchema ruslanRecordSchema;
 
-    //@PostConstruct
+    @PostConstruct
     public void init() {
         log.fine("Preparing XSL templates");
         log.fine(Objects.requireNonNull(getClass().getClassLoader().getResource("RUSMARC2Apa.xsl")).toString());
@@ -50,29 +50,31 @@ public class ApaRecordSchema implements RecordSchema {
     }
 
     @Override
-    public String getURI() {
-        return URI;
+    public Object getTransformedRecord(byte[] record, String encoding) throws Exception {
+        Document src = ruslanRecordSchema.toDocument(record, encoding);
+        ApaBuilder builder = getBuilder(src);
+        return builder.buildApa();
+
+    }
+
+    @Override
+    public String getMimeType() {
+        return "application/x-bibtex";
+    }
+
+    private ApaBuilder getBuilder(Document src) throws Exception {
+        Transformer transformer = templates.newTransformer();
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        DOMResult result = new DOMResult();
+        transformer.transform(new DOMSource(src), result);
+        //получаем поля из схемы для составления формата
+        Map<String, String> fields = XmlParser.parse((Document) result.getNode());
+        return new ApaBuilder(fields);
     }
 
     @Override
     public String toString(Record record, String encoding) throws Exception {
         return ruslanRecordSchema.toString(record, encoding);
-    }
-
-   //@Override
-   //public Document toDocument(Record record, String encoding) throws Exception {
-   //    return transformSchema(ruslanRecordSchema.toDocument(record, encoding));
-   //}
-
-    //@Override
-    public org.jsoup.nodes.Document transformSchema(Document src) throws Exception {
-        Transformer transformer = templates.newTransformer();
-        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-        DOMResult result = new DOMResult();
-        transformer.transform(new DOMSource(src), result);
-        Map<String, String> fields = XmlParser.parse((Document) result.getNode());
-        ApaBuilder builder = new ApaBuilder(fields);
-        return builder.build();
     }
 
     @Override

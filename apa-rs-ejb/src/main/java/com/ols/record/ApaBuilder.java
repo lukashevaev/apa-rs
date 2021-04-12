@@ -9,24 +9,18 @@ public class ApaBuilder {
     private String recordType;
     private final Map<String, String> fields;
 
-    public ApaBuilder(Map<String, String> fields) throws Exception {
+    public ApaBuilder(Map<String, String> fields) {
         this.fields = fields;
-        //recordType = fields.get("recordType");
         TypeDefiner typeDefiner = new TypeDefiner(fields);
-
-        setRecordType(typeDefiner.getRecordType());
+        this.recordType = typeDefiner.getRecordType();
         refactorFields();
-    }
-
-    private void setRecordType(String recordType){
-        this.recordType = recordType;
     }
 
     private void refactorFields() {
 
     }
 
-    public Document build() {
+    public Document buildApa() {
         String delimiter = ",";
         Document document = Jsoup.parse("<html></html>");
         document.body().appendText(fields.get("author")).appendText("(")
