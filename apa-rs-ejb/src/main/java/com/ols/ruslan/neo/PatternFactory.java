@@ -1,4 +1,4 @@
-package com.ols.record;
+package com.ols.ruslan.neo;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -12,16 +12,11 @@ public class PatternFactory {
     private PatternFactory(){
         patternsForType.put("@book",
                 new HashSet<>(Arrays.asList(
-                        Pattern.compile("энциклопедия"),
-                        Pattern.compile("encyclopaedia")
+                        Pattern.compile("энциклопедия|encyclopaedia")
                 )));
         patternsForType.put("@mvbook",
                 new HashSet<>(Arrays.asList(
-                        Pattern.compile("сборник"),
-                        Pattern.compile("собрание"),
-                        Pattern.compile("сочинения"),
-                        Pattern.compile("работы"),
-                        Pattern.compile("((в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?)$")
+                        Pattern.compile("сборник|собрание|сочинения|работы|((в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?)$")
                 )));
         patternsForType.put("@proceedings",
                 new HashSet<>(Arrays.asList(
