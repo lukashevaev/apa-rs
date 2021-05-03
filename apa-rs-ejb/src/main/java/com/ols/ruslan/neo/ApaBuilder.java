@@ -58,11 +58,6 @@ public class ApaBuilder {
         Map<String, String> fields = instance.getFields();
         fields.entrySet().forEach(entry -> entry.setValue(entry.getValue() + ". "));
 //        // Для следующих типов название должно быть в английских кавычках до названия источника
-//        if ("INPROCEEDINGS".equals(recordType)
-//                || "ARTICLE".equals(recordType)
-//                || "PHDTHESIS".equals(recordType)
-//                || "MASTERSTHESIS".equals(recordType)
-//        ) instance.setTitle("\"" + instance.getTitle() + "\"");
         if (!instance.getAuthor().equals("")) {
             builder.append(instance.getAuthor())
                     .append(instance.getYear())
@@ -94,6 +89,11 @@ public class ApaBuilder {
             builder.append(instance.getUniversity());
             builder.append(instance.getAddress());
         } else if ("PROCEEDINGS".equals(recordType)) {
+            builder.append(instance.getConference());
+            builder.append(instance.getAddress());
+            builder.append(instance.getData());
+            builder.append(instance.getPages());
+        } else if ("INPROCEEDINGS".equals(recordType)) {
             builder.append(instance.getConference());
             builder.append(instance.getAddress());
             builder.append(instance.getData());
