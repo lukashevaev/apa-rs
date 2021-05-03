@@ -223,6 +223,14 @@ public class ApaInstance {
         this.fields.remove("techreport");
     }
 
+    public String getTitleChapter() {
+        return fields.get("title_chapter") != null ? fields.get("title_chapter") : "";
+    }
+
+    public void setTitleChapter(String title_chapter) {
+        this.fields.put("title_chapter", title_chapter);
+    }
+
 
 
 

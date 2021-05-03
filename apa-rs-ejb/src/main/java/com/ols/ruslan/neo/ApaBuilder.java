@@ -14,6 +14,11 @@ public class ApaBuilder {
         refactorFields();
     }
 
+    // Метод для выделения цифр из поля
+    public String getDigits(String field) {
+        return field.replaceAll("[^0-9]", "");
+    }
+
     private void refactorFields() {
         if (!instance.getAuthor().equals("")){
             String author = instance.getAuthor();
@@ -64,6 +69,8 @@ public class ApaBuilder {
             builder.append(instance.getPublisher());
             builder.append(instance.getAddress());
         } else if ("INBOOK".equals(recordType)) {
+            instance.setTitleChapter("в " + instance.getTitleChapter());
+            builder.append(instance.getTitleChapter());
             builder.append(instance.getPublisher());
             builder.append(instance.getAddress());
             builder.append(instance.getPages());

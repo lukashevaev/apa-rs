@@ -57,6 +57,10 @@
                 </author>
 
 
+                <title_chapter>
+                    <xsl:value-of select="field[@id='463']/subfield[@id='1']/subfield[@id='200']/subfield[@id='a']" />
+                </title_chapter>
+
                 <title>
                     <xsl:value-of select="field[@id='200']/subfield[@id='a']" />
                     <xsl:for-each select="field[@id='200']/subfield[@id='h' or @id='i']">
