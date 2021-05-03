@@ -12,6 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>apa-rs-ejb</artifactId>
+    <packaging>ejb</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

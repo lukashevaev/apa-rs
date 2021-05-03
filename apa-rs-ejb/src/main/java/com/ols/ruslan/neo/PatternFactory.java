@@ -7,47 +7,29 @@ import java.util.regex.Pattern;
  * This class is used to create patterns to find the required fields and to check them for the correct format.
  */
 public class PatternFactory {
-    private static final Map<String, Set<Pattern>> patternsForType = new HashMap<>();
+    private static final Map<RecordType, Pattern> patternsForType = new HashMap<>();
 
     private PatternFactory(){
-        patternsForType.put("@book",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("энциклопедия|encyclopaedia")
-                )));
-        patternsForType.put("@mvbook",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("сборник|собрание|сочинения|работы|((в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?)$")
-                )));
-        patternsForType.put("@proceedings",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("proceedings"),
-                        Pattern.compile("of\\s*(a|the)\\s*conference"),
-                        Pattern.compile("conference"),
-                        Pattern.compile("proceedings\\s*of"),
-                        Pattern.compile("of\\s*(a|the).*\\s*colloquium"),
-                        Pattern.compile("of\\s*symposia"),
-                        Pattern.compile("symposium"),
-                        Pattern.compile("of\\s*(a|the)\\s*congress")
-                )));
-        patternsForType.put("@article",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("журнал"),
-                        Pattern.compile("journal"),
-                        Pattern.compile("статья"),
-                        Pattern.compile("article")
-                )));
-        patternsForType.put("@mastersthesis",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("дис.*маг")
-                )));
-        patternsForType.put("@phdthesis",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("дис.*канд")
-                )));
-        patternsForType.put("@techreport",
-                new HashSet<>(Arrays.asList(
-                        Pattern.compile("technical report")
-                )));
+        patternsForType.put(RecordType.BOOK,
+                Pattern.compile("энциклопедия|encyclopa[e]?dia|сборник|собрание|сочинения|работы|книга|" +
+                        "((в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?)$")); // Пример: сборник в 3 томах
+        patternsForType.put(RecordType.PROCEEDINGS,
+                Pattern.compile(
+                        "proceedings|" +
+                                "of\\s*(a|the)\\s*conference|конференци" +
+                                "conference|proceedings\\s*of|" +
+                                "of\\s*(a|the).*\\s*colloquium|колоквиум" +
+                                "of\\s*symposia|symposium|" +
+                                "of\\s*(a|the)\\s*congress"));
+        patternsForType.put(RecordType.ARTICLE,
+                Pattern.compile("журнал|journal|статья|article"));
+        patternsForType.put(RecordType.MASTERSTHESIS,
+                Pattern.compile(
+                        "дис.*маг|выпускная квалификационная работа магистра|" +
+                                "(master(s)?)?\\s*thesis\\s*((of)?\\smaster)?"));
+        patternsForType.put(RecordType.PHDTHESIS,
+                Pattern.compile("дис.*канд|выпускная квалификационная работа бакалавра"));
+
     }
 
     private static class PatternFactoryHolder {
@@ -77,7 +59,7 @@ public class PatternFactory {
 
     public static final Pattern pagePattern = Pattern.compile("\\d*\\s*(pages|[pсc]|стр|страниц)\\.?");
 
-    public Map<String, Set<Pattern>> getPatternsForType() {
+    public Map<RecordType, Pattern> getPatternsForType() {
         return patternsForType;
     }
 

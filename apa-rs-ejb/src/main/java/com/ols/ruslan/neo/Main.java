@@ -1,7 +1,5 @@
-package com.ols.record;
+package com.ols.ruslan.neo;
 
-import com.ols.ruslan.neo.ApaBuilder;
-import com.ols.ruslan.neo.XmlToApaTransformer;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;

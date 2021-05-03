@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class TypeDefiner {
     private ApaInstance instance;
     private String recordType;
-    private final Map<String, Set<Pattern>> patternsForType;
+    private final Map<RecordType, Pattern> patternsForType;
 
     public TypeDefiner(ApaInstance instance){
         PatternFactory patternFactory = PatternFactory.getInstance();

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@Singleton(name = "XmlToHarvardTransformer")
+@Singleton(name = "XmlApaTransformer")
 @Startup
 @Remote(MediaTypeTransformerFacade.class)
 @EJB(name = "java:global/ruslan/mediaType/application/xml/application/octet-stream", beanInterface = MediaTypeTransformerFacade.class)
