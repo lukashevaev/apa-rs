@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+/**
+ * Данный класс используется для того, чтобы определить тип записи на основании паттернов
+ */
 public class TypeDefiner {
     private ApaInstance instance;
     private String recordType;

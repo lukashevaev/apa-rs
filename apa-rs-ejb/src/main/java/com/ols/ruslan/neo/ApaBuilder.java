@@ -18,13 +18,16 @@ public class ApaBuilder {
     public String getDigits(String field) {
         return field.replaceAll("[^0-9]", "");
     }
-
+    // Изменение полей
     private void refactorFields() {
+
+        // Убираем разделитель после последнего упомянутого автора
         if (!instance.getAuthor().equals("")){
             String author = instance.getAuthor();
             instance.setAuthor(author.substring(0, author.length() - 1));
         }
 
+        // Запись вида автор1,автор2, ... авторn & авторn+1
         if (!instance.getAuthor().equals("")) {
             String[] authors = instance.getAuthor().split("-");
             switch (authors.length) {
@@ -46,6 +49,7 @@ public class ApaBuilder {
                 }
             }
         }
+        // Год должен быть указан в ()
         instance.setYear("(" + instance.getYear() + ")");
     }
 
@@ -53,14 +57,20 @@ public class ApaBuilder {
         StringBuilder builder = new StringBuilder();
         Map<String, String> fields = instance.getFields();
         fields.entrySet().forEach(entry -> entry.setValue(entry.getValue() + ". "));
+        // Для следующих типов название должно быть в английских кавычках до названия источника
         if ("INPROCEEDINGS".equals(recordType)
                 || "ARTICLE".equals(recordType)
                 || "PHDTHESIS".equals(recordType)
                 || "MASTERSTHESIS".equals(recordType)
         ) instance.setTitle("\"" + instance.getTitle() + "\"");
-        builder.append(instance.getAuthor())
-                .append(instance.getYear())
-                .append(instance.getTitle());
+        if (!instance.getAuthor().equals("")) {
+            builder.append(instance.getAuthor())
+                    .append(instance.getYear())
+                    .append(instance.getTitle());
+        } else {
+            builder.append(instance.getTitle())
+                    .append(instance.getYear());
+        }
         if ("ARTICLE".equals(recordType)) {
             builder.append(instance.getJournal());
             builder.append(instance.getVolume());
@@ -89,6 +99,7 @@ public class ApaBuilder {
             builder.append(instance.getData());
             builder.append(instance.getPages());
         }
+        // Убираем лишние символы из вывода
         builder.trimToSize();
         builder.deleteCharAt(builder.length() - 2);
         return builder.toString().replace("..", ".");
