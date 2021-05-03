@@ -57,12 +57,12 @@ public class ApaBuilder {
         StringBuilder builder = new StringBuilder();
         Map<String, String> fields = instance.getFields();
         fields.entrySet().forEach(entry -> entry.setValue(entry.getValue() + ". "));
-        // Для следующих типов название должно быть в английских кавычках до названия источника
-        if ("INPROCEEDINGS".equals(recordType)
-                || "ARTICLE".equals(recordType)
-                || "PHDTHESIS".equals(recordType)
-                || "MASTERSTHESIS".equals(recordType)
-        ) instance.setTitle("\"" + instance.getTitle() + "\"");
+//        // Для следующих типов название должно быть в английских кавычках до названия источника
+//        if ("INPROCEEDINGS".equals(recordType)
+//                || "ARTICLE".equals(recordType)
+//                || "PHDTHESIS".equals(recordType)
+//                || "MASTERSTHESIS".equals(recordType)
+//        ) instance.setTitle("\"" + instance.getTitle() + "\"");
         if (!instance.getAuthor().equals("")) {
             builder.append(instance.getAuthor())
                     .append(instance.getYear())
