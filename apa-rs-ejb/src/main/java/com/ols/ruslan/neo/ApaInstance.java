@@ -7,9 +7,33 @@ import java.util.Map;
  */
 public class ApaInstance {
     private Map<String, String> fields;
+    private String oldType;
+
 
     public ApaInstance(Map<String, String> fields) {
         this.fields = fields;
+        oldType = getRecordType();
+        setTitle(getTitle());
+        setJournal(getJournal());
+        fields.remove("journal_description");
+    }
+
+    public String getOldType() {
+        return oldType;
+    }
+
+    public void setOldType(String oldType) {
+        if (oldType != null && !"".equals(oldType)) return;
+        this.oldType = oldType;
+    }
+
+    public String getEditor() {
+        return fields.get("editor") != null ? fields.get("editor") : "";
+    }
+
+    public void setEditor(String editor) {
+        if (fields.get("editor") == null) return;
+        this.fields.put("editor", editor);
     }
 
     public Map<String, String> getFields() {
@@ -25,6 +49,7 @@ public class ApaInstance {
     }
 
     public void setRecordType(String recordType) {
+        if (fields.get("recordType") == null) return;
         this.fields.put("recordType", recordType);
     }
 
@@ -33,6 +58,7 @@ public class ApaInstance {
     }
 
     public void setTechreport(String techreport) {
+        if (fields.get("techreport") == null) return;
         this.fields.put("techreport", techreport);
     }
 
@@ -41,6 +67,7 @@ public class ApaInstance {
     }
 
     public void setConference(String conference) {
+        if (fields.get("conference") == null) return;
         this.fields.put("conference", conference);
     }
 
@@ -49,6 +76,7 @@ public class ApaInstance {
     }
 
     public void setData(String data) {
+        if (fields.get("data") == null) return;
         this.fields.put("data", data);
     }
 
@@ -57,16 +85,16 @@ public class ApaInstance {
     }
 
     public void setUniversity(String university) {
+        if (fields.get("university") == null) return;
         this.fields.put("university", university);
     }
-
-
 
     public String getAuthor() {
         return fields.get("author") != null ? fields.get("author") : "";
     }
 
     public void setAuthor(String author) {
+        if (fields.get("author") == null) return;
         this.fields.put("author", author);
     }
 
@@ -75,6 +103,7 @@ public class ApaInstance {
     }
 
     public void setYear(String year) {
+        if (fields.get("year") == null) return;
         this.fields.put("year", year);
     }
 
@@ -83,14 +112,20 @@ public class ApaInstance {
     }
 
     public void setPublisher(String publisher) {
+        if (fields.get("publisher") == null) return;
         this.fields.put("publisher", publisher);
     }
 
     public String getTitle() {
-        return fields.get("title") != null ? fields.get("title") : "";
+        StringBuilder builder = new StringBuilder();
+        String recordType = fields.get("recordType");
+        if (fields.get("title") != null) builder.append(fields.get("title"));
+        if (recordType != null && PatternFactory.notEmptyFieldPattern.matcher(recordType).find()) builder.append(": ").append(recordType);
+        return builder.toString();
     }
 
     public void setTitle(String title) {
+        if (fields.get("title") == null) return;
         this.fields.put("title", title);
     }
 
@@ -99,6 +134,7 @@ public class ApaInstance {
     }
 
     public void setLanguage(String language) {
+        if (fields.get("language") == null) return;
         this.fields.put("language", language);
     }
 
@@ -107,6 +143,7 @@ public class ApaInstance {
     }
 
     public void setSchool(String school) {
+        if (fields.get("school") == null) return;
         this.fields.put("school", school);
     }
 
@@ -115,6 +152,7 @@ public class ApaInstance {
     }
 
     public void setUrl(String url) {
+        if (fields.get("url") == null) return;
         this.fields.put("url", url);
     }
 
@@ -123,6 +161,7 @@ public class ApaInstance {
     }
 
     public void setAddress(String address) {
+        if (fields.get("address") == null) return;
         this.fields.put("address", address);
     }
 
@@ -131,14 +170,22 @@ public class ApaInstance {
     }
 
     public void setEdition(String edition) {
+        if (fields.get("edition") == null) return;
         this.fields.put("edition", edition);
     }
 
+
     public String getJournal() {
-        return fields.get("journal") != null ? fields.get("journal") : "";
+        StringBuilder journal = new StringBuilder();
+        if (fields.get("journal") != null && !fields.get("journal").equals("")) journal.append(fields.get("journal"));
+        if (fields.get("journal_description") != null && PatternFactory.journalPattern.matcher(fields.get("journal_description").toLowerCase()).find()) {
+            journal.append(", ").append(fields.get("journal_description"));
+        }
+        return journal.toString();
     }
 
     public void setJournal(String journal) {
+        if (fields.get("journal") == null) return;
         this.fields.put("journal", journal);
     }
 
@@ -147,6 +194,7 @@ public class ApaInstance {
     }
 
     public void setNumber(String number) {
+        if (fields.get("number") == null) return;
         this.fields.put("number", number);
     }
 
@@ -155,6 +203,7 @@ public class ApaInstance {
     }
 
     public void setPages(String pages) {
+        if (fields.get("pages") == null) return;
         this.fields.put("pages", pages);
     }
 
@@ -163,6 +212,7 @@ public class ApaInstance {
     }
 
     public void setVolume(String volume) {
+        if (fields.get("volume") == null) return;
         this.fields.put("volume", volume);
     }
 

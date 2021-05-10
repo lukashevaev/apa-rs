@@ -13,7 +13,7 @@ public class TypeDefiner {
     private final Map<RecordType, Pattern> patternsForType;
 
     public TypeDefiner(ApaInstance instance){
-        PatternFactory patternFactory = PatternFactory.getInstance();
+        PatternFactory patternFactory = new PatternFactory();
         patternsForType = patternFactory.getPatternsForType();
         this.instance = instance;
         recordType = instance.getRecordType().toLowerCase();

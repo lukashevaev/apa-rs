@@ -1,209 +1,89 @@
-<record syntax="1.2.840.10003.5.28.1">
+<record syntax="rusmarc">
     <leader>
-        <length>01581</length>
+        <length>00780</length>
         <status>n</status>
         <type>a</type>
-        <leader07>a</leader07>
-        <leader08>2</leader08>
+        <leader07>m</leader07>
+        <leader08> </leader08>
         <leader09>a</leader09>
         <indicatorCount>2</indicatorCount>
         <identifierLength>2</identifierLength>
-        <dataBaseAddress>00277</dataBaseAddress>
-        <leader17> </leader17>
+        <dataBaseAddress>00241</dataBaseAddress>
+        <leader17>3</leader17>
         <leader18>i</leader18>
         <leader19> </leader19>
         <entryMap>450 </entryMap>
     </leader>
-    <field id="001">RU\SPSTU\analits2005\1</field>
-    <field id="005">20171225210917.3</field>
-    <field id="035">
-        <indicator id="1"> </indicator>
-        <indicator id="2"> </indicator>
-        <subfield id="a">RU\SPSTU\analits2004\1</subfield>
-    </field>
+    <field id="001">1</field>
+    <field id="005">20190822123749.9</field>
     <field id="100">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">20050902a2004 k y0rusy01020304ca</subfield>
+        <subfield id="a">19991022d1969 k y1rusb01020304ca</subfield>
     </field>
-    <field id="101">
-        <indicator id="1">0</indicator>
-        <indicator id="2"> </indicator>
-        <subfield id="a">rus</subfield>
-    </field>
-    <field id="102">
+    <field id="105">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">RU</subfield>
+        <subfield id="a">a j </subfield>
     </field>
     <field id="200">
         <indicator id="1">1</indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">Магнитоэлектрические композиционные материалы на основе феррит- пьезоэлектриков в 3 т.</subfield>
-        <subfield id="b">Электронный ресурс</subfield>
-        <subfield id="e">Дис... канд. техн. наук</subfield>
-        <subfield id="f">М. И. Бичурин, В. М. Петров, Д. А. Филиппов и др.</subfield>
+        <subfield id="a">Thermodynamics </subfield>
+        <subfield id="e">An introductory text for engineering students</subfield>
+    </field>
+    <field id="205">
+        <indicator id="1"> </indicator>
+        <indicator id="2"> </indicator>
+        <subfield id="a">2. ed</subfield>
+    </field>
+    <field id="210">
+        <indicator id="1"> </indicator>
+        <indicator id="2"> </indicator>
+        <subfield id="a">Reading et al.</subfield>
+        <subfield id="c">Addison-Wesley</subfield>
+        <subfield id="d">1969</subfield>
     </field>
     <field id="215">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">503 с.</subfield>
-        <subfield id="c">рис.</subfield>
-        <subfield id="d">505 c.</subfield>
+        <subfield id="a">622p.</subfield>
     </field>
-
-    <field id="205">
-        <subfield id="a">7-изд.</subfield>
-    </field>
-
-    <field id="225">
-        <indicator id="1">1</indicator>
-        <indicator id="2"> </indicator>
-        <subfield id="a">Физико- химические основы создания материалов и технологий</subfield>
-    </field>
-    <field id="320">
+    <field id="606">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">Библиогр.: с.12</subfield>
+        <subfield id="2">spstush</subfield>
+        <subfield id="3">RU\SPSTU\sub\1215</subfield>
+        <subfield id="a">Термодинамика</subfield>
     </field>
-    <field id="461">
+    <field id="620">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="1">
-            <field id="001">RU\SPSTU\ser\115889</field>
-        </subfield>
-        <subfield id="1">
-            <field id="101">
-                <indicator id="1">0</indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">rus</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="102">
-                <indicator id="1"> </indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">RU</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="200">
-                <indicator id="1">1</indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">Journal</subfield>
-                <subfield id="d">Perspektivnye materialy</subfield>
-                <subfield id="f">Российская академия наук. Институт металлургии и материаловедения им. А. А. Байкова; Московский государственный институт электроники и математики (Технический университет); Московский государственный индустриальный университет</subfield>
-                <subfield id="z">und</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="210">
-                <indicator id="1"> </indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">М.</subfield>
-                <subfield id="c">Интерконтакт Наука </subfield>
-                <subfield id="b">СПБ</subfield>
-                <subfield id="d">1997-</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="606">
-                <indicator id="1">0</indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">Материалы</subfield>
-                <subfield id="2">spstush</subfield>
-                <subfield id="3">RU\SPSTU\sub\895</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="675">
-                <indicator id="1"> </indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">620(051)</subfield>
-            </field>
-        </subfield>
+        <subfield id="d">Readingetal.</subfield>
     </field>
-    <field id="463">
+    <field id="675">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="1">
-            <field id="001">RU\SPSTU\ser\181932</field>
-        </subfield>
-        <subfield id="1">
-            <field id="101">
-                <indicator id="1">0</indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">rus</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="102">
-                <indicator id="1"> </indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a">RU</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="200">
-                <indicator id="1">0</indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="a"> № 3 </subfield>
-                <subfield id="v">С.5-12</subfield>
-            </field>
-        </subfield>
-        <subfield id="1">
-            <field id="210">
-                <indicator id="1"> </indicator>
-                <indicator id="2"> </indicator>
-                <subfield id="d">2004</subfield>
-            </field>
-        </subfield>
+        <subfield id="a">536.7</subfield>
     </field>
-    <field id="610">
-        <indicator id="1">1</indicator>
-        <indicator id="2"> </indicator>
-        <subfield id="a">электронные материалы</subfield>
-        <subfield id="a">композиты</subfield>
-        <subfield id="a">электромеханический резонанс</subfield>
-        <subfield id="a">твердотельная электроника</subfield>
-        <subfield id="a">ультразвуковые методы</subfield>
+    <field id="700">
+        <indicator id="1"> </indicator>
+        <indicator id="2">1</indicator>
+        <subfield id="a">Lee</subfield>
+        <subfield id="b">J. F.</subfield>
     </field>
     <field id="701">
         <indicator id="1"> </indicator>
         <indicator id="2">1</indicator>
-        <subfield id="a">Бичурин</subfield>
-        <subfield id="b">М. И.</subfield>
-    </field>
-    <field id="701">
-        <indicator id="1"> </indicator>
-        <indicator id="2">1</indicator>
-        <subfield id="a">Петров</subfield>
-        <subfield id="b">В. М.</subfield>
-    </field>
-    <field id="701">
-        <indicator id="1"> </indicator>
-        <indicator id="2">1</indicator>
-        <subfield id="a">Филиппов</subfield>
-        <subfield id="b">Д. А.</subfield>
-    </field>
-    <field id="701">
-        <indicator id="1"> </indicator>
-        <indicator id="2">1</indicator>
-        <subfield id="a">Сринивасан</subfield>
-        <subfield id="b">Г.</subfield>
-    </field>
-    <field id="701">
-        <indicator id="1"> </indicator>
-        <indicator id="2">1</indicator>
-        <subfield id="a">Лалетин</subfield>
-        <subfield id="b">В. М.</subfield>
+        <subfield id="a">Sears</subfield>
+        <subfield id="b">F. W.</subfield>
     </field>
     <field id="801">
         <indicator id="1"> </indicator>
-        <indicator id="2">1</indicator>
+        <indicator id="2">0</indicator>
         <subfield id="a">RU</subfield>
         <subfield id="b">19013582</subfield>
-        <subfield id="c">20050901</subfield>
+        <subfield id="c">19991022</subfield>
         <subfield id="g">PSBO</subfield>
     </field>
     <field id="801">
@@ -211,12 +91,33 @@
         <indicator id="2">2</indicator>
         <subfield id="a">RU</subfield>
         <subfield id="b">19013582</subfield>
-        <subfield id="c">20050902</subfield>
+        <subfield id="c">20020415</subfield>
+        <subfield id="g">PSBO</subfield>
+    </field>
+    <field id="801">
+        <indicator id="1"> </indicator>
+        <indicator id="2">2</indicator>
+        <subfield id="a">RU</subfield>
+        <subfield id="b">19013582</subfield>
+        <subfield id="c">20071005</subfield>
         <subfield id="g">PSBO</subfield>
     </field>
     <field id="998">
         <indicator id="1"> </indicator>
         <indicator id="2"> </indicator>
-        <subfield id="a">макома000000000000</subfield>
+        <subfield id="a">th0000radd1969lee0</subfield>
+    </field>
+    <field id="999">
+        <indicator id="1"> </indicator>
+        <indicator id="2"> </indicator>
+        <subfield id="a">19013582</subfield>
+        <subfield id="b">ОНЛ</subfield>
+        <subfield id="e">-1/19960131</subfield>
+        <subfield id="h">536.7</subfield>
+        <subfield id="i">L47</subfield>
+        <subfield id="p">2982892</subfield>
+        <subfield id="u">1,00</subfield>
+        <subfield id="v">1</subfield>
+        <subfield id="y">0000043347</subfield>
     </field>
 </record>

@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 public class PatternFactory {
     private static final Map<RecordType, Pattern> patternsForType = new HashMap<>();
 
-    private PatternFactory(){
+    public PatternFactory(){
         patternsForType.put(RecordType.BOOK,
                 Pattern.compile("энциклопедия|encyclopa[e]?dia|сборник|собрание|сочинения|работы|книга|" +
-                        "((в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?)$")); // Пример: сборник в 3 томах
+                        "(в|in)\\s\\d+-?х?\\s(т|ч|vols)\\.?$")); // Пример: сборник в 3 томах
         patternsForType.put(RecordType.PROCEEDINGS,
                 Pattern.compile(
                         "proceedings|" +
@@ -25,21 +25,9 @@ public class PatternFactory {
                                 "of\\s*(a|the)\\s*congress"));
         patternsForType.put(RecordType.ARTICLE,
                 Pattern.compile("журнал|journal|статья|article"));
-        patternsForType.put(RecordType.MASTERSTHESIS,
-                Pattern.compile(
-                        "дис.*маг|выпускная квалификационная работа магистра|" +
-                                "(master(s)?)?\\s*thesis\\s*((of)?\\smaster)?"));
-        patternsForType.put(RecordType.PHDTHESIS,
-                Pattern.compile("дис.*канд|выпускная квалификационная работа бакалавра"));
-
-    }
-
-    private static class PatternFactoryHolder {
-        private static final PatternFactory instance = new PatternFactory();
-    }
-
-    public static PatternFactory getInstance(){
-        return PatternFactoryHolder.instance;
+        patternsForType.put(RecordType.THESIS,
+                Pattern.compile("дис.*канд|выпускная квалификационная работа|дис.*маг|дис.*док|диссертац|" +
+                        "((master(s)|bachelor)?)?\\s*thesis\\s*((of)?\\smaster(s)|bachelor)?"));
     }
 
     /** Для поля "pages"
@@ -71,6 +59,10 @@ public class PatternFactory {
     public Map<RecordType, Pattern> getPatternsForType() {
         return patternsForType;
     }
+
+    public static final Pattern journalPattern = Pattern.compile("журнал|journal");
+
+    public static final Pattern notEmptyFieldPattern = Pattern.compile("[a-zA-Zа-яА-Я0-9]");
 
 
     /**
