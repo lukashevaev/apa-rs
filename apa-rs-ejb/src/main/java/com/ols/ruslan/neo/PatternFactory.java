@@ -64,8 +64,4 @@ public class PatternFactory {
 
     public static final Pattern notEmptyFieldPattern = Pattern.compile("[a-zA-Zа-яА-Я0-9]");
 
-
-    /**
-     * This methods creates patterns that define a type of current record in method "defineType()" of class TypeDefiner
-     */
 }

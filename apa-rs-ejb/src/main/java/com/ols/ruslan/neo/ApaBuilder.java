@@ -73,7 +73,6 @@ public class ApaBuilder {
 
     public String  buildApa() {
         StringBuilder builder = new StringBuilder();
-//        // Для следующих типов название должно быть в английских кавычках до названия источника
         if (!instance.getAuthor().equals("")) {
             builder.append(instance.getAuthor())
                     .append(instance.getYear())
@@ -81,8 +80,8 @@ public class ApaBuilder {
                     .append(instance.getEditor());
         } else {
             builder.append(instance.getEditor())
-                    .append(instance.getTitle())
-                    .append(instance.getYear());
+                    .append(instance.getYear())
+                    .append(instance.getTitle());
         }
         if ("ARTICLE".equals(recordType)) {
             builder.append(instance.getJournal())
@@ -133,6 +132,7 @@ public class ApaBuilder {
         if (field != null) return builder
                 .substring(0, result.lastIndexOf(field) + field.length())
                 .replaceAll("\\.\\s*[a-zA-Zа-яА-Я]?\\s*\\.", ".")
+                .replace("..", ".")
                 .replaceAll(",\\s*[,.]", ",")
                 .replaceAll(":\\s*[,.]", ":");
         return result;
