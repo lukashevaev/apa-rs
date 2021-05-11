@@ -61,7 +61,15 @@ public class ApaBuilder {
         instance.setOldType("(" + instance.getOldType() + ")");
 
 
-        instance.getFields().entrySet().forEach(entry -> entry.setValue(entry.getValue() + ". "));
+        instance.getFields().entrySet().forEach(entry -> {
+            String value = entry.getValue();
+            if (value != null
+                    && value.length() > 1
+                    && !PatternFactory.specialSymbolsPattern.matcher(String.valueOf(value.charAt(value.length() - 1))).find()
+                    && PatternFactory.notEmptyFieldPattern.matcher(entry.getValue()).find()) {
+                entry.setValue(entry.getValue() + ". ");
+            }
+        });
         //Удаляем пустые поля
         instance.setFields(
                 instance.getFields()
@@ -90,12 +98,14 @@ public class ApaBuilder {
         } else if ("BOOK".equals(recordType)) {
             builder.append(instance.getVolume())
                     .append(instance.getAddress())
-                    .append(instance.getPublisher());
+                    .append(instance.getPublisher())
+                    .append(instance.getPages());
         } else if ("INBOOK".equals(recordType)) {
             builder.append(instance.getTitleChapter())
                     .append(getDigits(instance.getPages()))
                     .append(instance.getAddress())
-                    .append(instance.getPublisher());
+                    .append(instance.getPublisher())
+                    .append(instance.getPages());
         } else if ("THESIS".equals(recordType)) {
             builder.append(instance.getOldType())
                     .append(instance.getUniversity())
