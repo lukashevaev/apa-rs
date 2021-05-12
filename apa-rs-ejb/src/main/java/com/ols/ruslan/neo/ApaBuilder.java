@@ -141,7 +141,8 @@ public class ApaBuilder {
         String result = builder.toString();
         if (field != null) return builder
                 .substring(0, result.lastIndexOf(field) + field.length())
-                .replaceAll("\\.\\s*[a-zA-Zа-яА-Я]?\\s*\\.", ".")
+                .replaceAll("\\.\\s*\\.", ".")
+                .replaceAll("\\.[a-zA-Zа-яА-Я]?\\.", ".")
                 .replace("..", ".")
                 .replaceAll(",\\s*[,.]", ",")
                 .replaceAll(":\\s*[,.]", ":");
