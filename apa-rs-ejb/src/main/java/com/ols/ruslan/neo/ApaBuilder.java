@@ -3,6 +3,7 @@ package com.ols.ruslan.neo;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ApaBuilder {
@@ -23,13 +24,54 @@ public class ApaBuilder {
         }
         return field.replaceAll("[^0-9-]", "");
     }
+
+    private Integer getPosition(String[] array, String destination) {
+        for (int i = 0; i <= array.length; i++) {
+            if (Objects.equals(array[i], destination)) {
+                return i;
+            }
+        }
+        return -1;
+    }
     // Изменение полей
     private void refactorFields() {
         instance.deleteRecordType();
 
         if (!"".equals(instance.getVolume()) && !"".equals(instance.getNumber())) instance.deleteNumber();
 
-        // Запись вида автор1,автор2, ... авторn & авторn+1
+        instance.getAuthor().ifPresent(author -> {
+            String[] allAuthors = author.split("-");
+            StringBuilder builder = new StringBuilder();
+            Arrays.stream(allAuthors).forEach(fullName -> {
+                String[] authors = fullName.trim().split(" ");
+                //Arrays.stream(authors).forEach(s -> s = s.replaceAll(",", "").trim());
+                String name = authors[0].trim() + ", ";
+                builder.append(name);
+                Arrays.stream(authors).skip(1).forEach(str -> builder.append(str.trim()).append(" "));
+                if (allAuthors.length >= 2) {
+                    Integer position = getPosition(allAuthors, fullName);
+                    if (position != allAuthors.length - 2) {
+                        builder.append(", ");
+                    } else {
+                        builder.append(" & ");
+                    }
+                } else {
+                    builder.append(" & ");
+                }
+            });
+            if (allAuthors.length == 1) {
+                instance.setAuthor(builder.toString().replaceAll("&", "").trim());
+            } else {
+                String result = builder.toString().trim();
+                if (result.endsWith(",")) {
+                    result = result.substring(0, result.length() - 1);
+                }
+                instance.setAuthor(result);
+            }
+        });
+
+
+       /* // Запись вида автор1,автор2, ... авторn & авторn+1
         if (!instance.getAuthor().equals("")) {
             String[] authors = instance.getAuthor().split("-");
             switch (authors.length) {
@@ -50,16 +92,16 @@ public class ApaBuilder {
                     break;
                 }
             }
-        }
+        }*/
         // Год должен быть указан в ()
         instance.setYear("(" + instance.getYear() + ")");
         instance.setTitleChapter("в " + instance.getTitleChapter());
         instance.setJournal(instance.getJournal() + ", ");
-        instance.setVolume("(" + instance.getVolume() + "),");
+        instance.setVolume("(" + getDigits(instance.getVolume()) + "),");
         instance.setAddress(instance.getAddress() + ": ");
         instance.setEditor("В " + instance.getEditor() + "(Ред.), ");
         instance.setOldType("(" + instance.getOldType() + ")");
-
+        instance.setPages(getDigits(instance.getPages()));
 
         instance.getFields().entrySet().forEach(entry -> {
             String value = entry.getValue();
@@ -70,6 +112,7 @@ public class ApaBuilder {
                 entry.setValue(entry.getValue() + ". ");
             }
         });
+
         //Удаляем пустые поля
         instance.setFields(
                 instance.getFields()
@@ -81,8 +124,8 @@ public class ApaBuilder {
 
     public String  buildApa() {
         StringBuilder builder = new StringBuilder();
-        if (!instance.getAuthor().equals("")) {
-            builder.append(instance.getAuthor())
+        if (instance.getAuthor().isPresent()) {
+            builder.append(instance.getAuthor().get())
                     .append(instance.getYear())
                     .append(instance.getTitle())
                     .append(instance.getEditor());
@@ -96,9 +139,9 @@ public class ApaBuilder {
                     .append(instance.getVolume())
                     .append(getDigits(instance.getPages()));
         } else if ("BOOK".equals(recordType)) {
-            builder.append(instance.getVolume())
-                    .append(instance.getAddress())
+            builder.append(instance.getAddress())
                     .append(instance.getPublisher())
+                    .append(instance.getVolume())
                     .append(instance.getPages());
         } else if ("INBOOK".equals(recordType)) {
             builder.append(instance.getTitleChapter())
@@ -142,7 +185,6 @@ public class ApaBuilder {
         if (field != null) return builder
                 .substring(0, result.lastIndexOf(field) + field.length())
                 .replaceAll("\\.\\s*\\.", ".")
-                .replaceAll("\\.[a-zA-Zа-яА-Я]?\\.", ".")
                 .replace("..", ".")
                 .replaceAll(",\\s*[,.]", ",")
                 .replaceAll(":\\s*[,.]", ":");

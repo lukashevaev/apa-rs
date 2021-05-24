@@ -1,6 +1,7 @@
 package com.ols.ruslan.neo;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Данный класс хранит в себе поля и дает к ним доступ
@@ -89,8 +90,8 @@ public class ApaInstance {
         this.fields.put("university", university);
     }
 
-    public String getAuthor() {
-        return fields.get("author") != null ? fields.get("author") : "";
+    public Optional<String> getAuthor() {
+        return Optional.ofNullable(fields.get("author"));
     }
 
     public void setAuthor(String author) {
@@ -180,6 +181,7 @@ public class ApaInstance {
         if (fields.get("journal") != null && !fields.get("journal").equals("")) journal.append(fields.get("journal"));
         if (fields.get("journal_description") != null && PatternFactory.journalPattern.matcher(fields.get("journal_description").toLowerCase()).find()) {
             journal.append(", ").append(fields.get("journal_description"));
+            setRecordType("ARTICLE");
         }
         return journal.toString();
     }
