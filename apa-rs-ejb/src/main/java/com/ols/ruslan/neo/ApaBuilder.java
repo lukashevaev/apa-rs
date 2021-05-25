@@ -97,9 +97,10 @@ public class ApaBuilder {
         instance.setYear("(" + instance.getYear() + ")");
         instance.setTitleChapter("в " + instance.getTitleChapter());
         instance.setJournal(instance.getJournal() + ", ");
-        instance.setVolume("(" + getDigits(instance.getVolume()) + "),");
+        instance.setVolume("(" + getDigits(instance.getVolume()) + "), ");
         instance.setAddress(instance.getAddress() + ": ");
-        instance.setEditor("В " + instance.getEditor() + "(Ред.), ");
+        instance.setPublisher(instance.getPublisher() + ", ");
+        instance.setEditor("В " + instance.getEditor() + " (Ред.), ");
         instance.setOldType("(" + instance.getOldType() + ")");
         instance.setPages(getDigits(instance.getPages()));
 
@@ -129,10 +130,13 @@ public class ApaBuilder {
                     .append(instance.getYear())
                     .append(instance.getTitle())
                     .append(instance.getEditor());
-        } else {
+        } else if (!instance.getEditor().equals("")) {
             builder.append(instance.getEditor())
                     .append(instance.getYear())
                     .append(instance.getTitle());
+        } else {
+            builder.append(instance.getTitle())
+                    .append(instance.getYear());
         }
         if ("ARTICLE".equals(recordType)) {
             builder.append(instance.getJournal())
