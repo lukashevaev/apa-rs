@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
@@ -42,7 +43,12 @@ public class XmlToApaTransformer implements MediaTypeTransformerFacade{
                     XmlToApaTransformer.class.getClassLoader().getResourceAsStream(
                             "RUSMARC2Apa.xsl")));
 
-        } catch (TransformerConfigurationException e) {
+            // Создаем трансформер для преобразования одного xml в другой
+            transformer = templates.newTransformer();
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            builder = factory.newDocumentBuilder();
+
+        } catch (TransformerConfigurationException | ParserConfigurationException e) {
             log.severe("Unable to initialise templates: " + e.getMessage());
             e.printStackTrace();
         }
