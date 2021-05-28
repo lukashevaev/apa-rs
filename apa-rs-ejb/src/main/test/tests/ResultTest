@@ -75,4 +75,3 @@ public class ResultTest {
         testPart(11);
     }
 }
-
