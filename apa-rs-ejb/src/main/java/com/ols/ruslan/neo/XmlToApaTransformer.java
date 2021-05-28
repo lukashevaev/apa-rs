@@ -11,6 +11,8 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -26,6 +28,10 @@ public class XmlToApaTransformer implements MediaTypeTransformerFacade{
             .getName());
     private static final TransformerFactory transformerFactory = TransformerFactory.newInstance();
     private static Templates templates;
+
+    private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    private Transformer transformer;
+    private DocumentBuilder builder;
 
 
     @PostConstruct
@@ -59,8 +65,38 @@ public class XmlToApaTransformer implements MediaTypeTransformerFacade{
         // Трансформация,парсинг и создание нового формата
         transformer.transform(new DOMSource(document), result);
         Map<String, String> fields = XmlParser.parse((Document) result.getNode());
-        ApaBuilder bibTexBuilder = new ApaBuilder(fields);
+        ApaBuilder apaBuilder = new ApaBuilder(fields);
 
-        return bibTexBuilder.buildApa().getBytes(encoding);
+        return apaBuilder.buildApa().getBytes(encoding);
+    }
+
+    public String transformTest(byte[] content) throws Exception {
+        DOMResult result = new DOMResult();
+
+        // Создаем источник для преобразования из поступившего массива байт
+        Document document = builder.parse(new ByteArrayInputStream(content));
+
+        //Трансформация,парсинг и создание нового формата
+        transformer.transform(new DOMSource(document), result);
+
+        Map<String, String> fields = XmlParser.parse((Document) result.getNode());
+
+        ApaBuilder apaBuilder = new ApaBuilder(fields);
+
+        String apa = apaBuilder.buildApa();
+
+        fillApaFile(apa);
+
+        return apa;
+    }
+
+    private void fillApaFile(String apa) {
+        try (FileWriter writer = new FileWriter("src/main/resources/apa.txt", false)) {
+            writer.write(apa);
+
+            writer.flush();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }
